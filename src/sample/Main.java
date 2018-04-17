@@ -1,8 +1,6 @@
 package sample;
 
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import data.TelefonEntry;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -13,11 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -36,7 +29,7 @@ public class Main extends Application {
         ObservableList<TelefonEntry> list = FXCollections.observableArrayList();
         searchArea.getImportButton().setOnMouseClicked(event -> {
             List<TelefonEntry> fromFile = FileSystem.readEntriesFromFile();
-            if(fromFile != null){
+            if (fromFile != null) {
                 list.addAll(fromFile);
             }
         });
