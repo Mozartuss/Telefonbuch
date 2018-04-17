@@ -18,6 +18,8 @@ import java.util.List;
 public class FileSystem {
 
     private static Path path = Paths.get("TelefonEntries.json");
+    public List<TelefonEntry> entries = new ArrayList<>();
+
 
     public static List<TelefonEntry> readEntriesFromFile() {
         List<TelefonEntry> entries = new ArrayList<>();
@@ -36,22 +38,35 @@ public class FileSystem {
         return entries;
     }
 
+
+
     public static void writeFile(List<TelefonEntry> entries) {
         JsonFactory factory = new JsonFactory();
-        try (OutputStream os = Files.newOutputStream(path);
-             JsonGenerator jg = factory.createGenerator(os)) {
-            jg.writeStartArray();
+        try (OutputStream outputStream = Files.newOutputStream(path);
+             JsonGenerator jsonGenerator = factory.createGenerator(outputStream)) {
+            jsonGenerator.writeStartArray();
             for (TelefonEntry entry : entries) {
-                jg.writeStartObject();
-                jg.writeStringField("lastName", entry.getLastName());
-                jg.writeStringField("firstName", entry.getFirstName());
-                jg.writeStringField("number", entry.getNumber());
-                jg.writeEndObject();
+                jsonGenerator.writeStartObject();
+                jsonGenerator.writeStringField("lastName", entry.getLastName());
+                jsonGenerator.writeStringField("firstName", entry.getFirstName());
+                jsonGenerator.writeStringField("number", entry.getNumber());
+                jsonGenerator.writeEndObject();
             }
-            jg.writeEndArray();
-            jg.close();
+            jsonGenerator.writeEndArray();
+            jsonGenerator.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void FileSystem() {
+
+        if (path != null) {
+            List<TelefonEntry> fromFile = readEntriesFromFile();
+
+            if (fromFile != null) {
+                entries.addAll(fromFile);
+            }
+
         }
     }
 }

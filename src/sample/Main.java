@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.function.Predicate;
 
 // was ist das boot sdk
@@ -28,22 +29,25 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        FileSystem fileSystem = new FileSystem();
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        FileSystem.readEntriesFromFile();
-
         BorderPane root = new BorderPane();
         SearchArea searchArea = new SearchArea();
-        searchArea.getImportButton().setOnMouseClicked(event -> FileSystem.readEntriesFromFile());
         ObservableList<TelefonEntry> list = FXCollections.observableArrayList();
-        list.add(new TelefonEntry("Kostas", "Patrick", "015757052183"));
-        list.add(new TelefonEntry("Kleybolte", "Lukas", "01632534558"));
+        searchArea.getImportButton().setOnMouseClicked(event -> {
+            List<TelefonEntry> fromFile = FileSystem.readEntriesFromFile();
+            if(fromFile != null){
+                list.addAll(fromFile);
+            }
+        });
+
+
         ui.EntryArea entryArea = new ui.EntryArea(list);
 
         AddRow addRow = new AddRow();
         addRow.getAddButton().setOnMouseClicked(event -> list.add(new TelefonEntry(addRow.getFirstnameInput(), addRow.getLastnameInput(), addRow.getNumberInput())));
         addRow.getDeleteButton().setOnMouseClicked(event -> list.removeAll(entryArea.getSelectedEntries()));
         addRow.getSaveButton().setOnMouseClicked(event -> FileSystem.writeFile(list));
-
 
         FilteredList<TelefonEntry> filteredData = new FilteredList<>(list, event -> true);
         searchArea.getSearchField().setOnKeyReleased(event -> {
@@ -80,7 +84,6 @@ public class Main extends Application {
 
 
     }
-
 
     public static void main(String[] args) {
         launch(args);
