@@ -18,7 +18,6 @@ import java.util.List;
 public class FileSystem {
 
     private static Path path = Paths.get("TelefonEntries.json");
-    public List<TelefonEntry> entries = new ArrayList<>();
 
 
     public static List<TelefonEntry> readEntriesFromFile() {
@@ -26,18 +25,21 @@ public class FileSystem {
         try (InputStream is = Files.newInputStream(path)) {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootArray = mapper.readTree(is);
-            for (JsonNode root : rootArray) {
-                String firstName = root.path("firstName").asText();
-                String lastName = root.path("lastName").asText();
-                String number = root.path("number").asText();
-                entries.add(new TelefonEntry(lastName, firstName, number));
-            }
+            rootArray(entries, rootArray);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return entries;
     }
 
+    static void rootArray(List<TelefonEntry> entries, JsonNode rootArray) {
+        for (JsonNode root : rootArray) {
+            String firstName = root.path("firstName").asText();
+            String lastName = root.path("lastName").asText();
+            String number = root.path("number").asText();
+            entries.add(new TelefonEntry(lastName, firstName, number));
+        }
+    }
 
 
     public static void writeFile(List<TelefonEntry> entries) {
@@ -56,17 +58,6 @@ public class FileSystem {
             jsonGenerator.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-    public void FileSystem() {
-
-        if (path != null) {
-            List<TelefonEntry> fromFile = readEntriesFromFile();
-
-            if (fromFile != null) {
-                entries.addAll(fromFile);
-            }
-
         }
     }
 }

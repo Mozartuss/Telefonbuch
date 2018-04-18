@@ -43,32 +43,32 @@ public class AddRow {
         AnchorPane.setLeftAnchor(firstnameInput, 10.0);
         AnchorPane.setTopAnchor(firstnameInput, 10.0);
         AnchorPane.setBottomAnchor(firstnameInput, 10.0);
-        AnchorPane.setRightAnchor(firstnameInput, 485.0);
+        firstnameInput.setPrefWidth(75.5);
 
-        AnchorPane.setLeftAnchor(lastnameInput, 125.0);
+        AnchorPane.setLeftAnchor(lastnameInput, 95.5);
         AnchorPane.setTopAnchor(lastnameInput, 10.0);
         AnchorPane.setBottomAnchor(lastnameInput, 10.0);
-        AnchorPane.setRightAnchor(lastnameInput, 360.0);
+        lastnameInput.setPrefWidth(75.5);
 
-        AnchorPane.setLeftAnchor(numberInput, 250.0);
+        AnchorPane.setLeftAnchor(numberInput, 181.0);
         AnchorPane.setTopAnchor(numberInput, 10.0);
         AnchorPane.setBottomAnchor(numberInput, 10.0);
-        AnchorPane.setRightAnchor(numberInput, 235.0);
-
-        AnchorPane.setTopAnchor(addButton, 10.0);
-        AnchorPane.setRightAnchor(addButton, 160.0);
-        AnchorPane.setBottomAnchor(addButton, 10.0);
-        addButton.setPrefWidth(70.0);
-
-        AnchorPane.setTopAnchor(deleteButton, 10.0);
-        AnchorPane.setRightAnchor(deleteButton, 85.0);
-        AnchorPane.setBottomAnchor(deleteButton, 10.0);
-        deleteButton.setPrefWidth(70.0);
+        numberInput.setPrefWidth(75.5);
 
         AnchorPane.setTopAnchor(saveButton, 10.0);
         AnchorPane.setRightAnchor(saveButton, 10.0);
         AnchorPane.setBottomAnchor(saveButton, 10.0);
         saveButton.setPrefWidth(70.0);
+
+        AnchorPane.setTopAnchor(deleteButton, 10.0);
+        AnchorPane.setRightAnchor(deleteButton, 98.0);
+        AnchorPane.setBottomAnchor(deleteButton, 10.0);
+        deleteButton.setPrefWidth(70.0);
+
+        AnchorPane.setTopAnchor(addButton, 10.0);
+        AnchorPane.setRightAnchor(addButton, 188.0);
+        AnchorPane.setBottomAnchor(addButton, 10.0);
+        addButton.setPrefWidth(70.0);
 
         pane.getChildren().addAll(firstnameInput, lastnameInput, numberInput, addButton, deleteButton, saveButton);
 

@@ -3,18 +3,19 @@ package ui;
 import data.TelefonEntry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import javafx.stage.Stage;
 
 import java.util.List;
 
 public class EntryArea {
     private final AnchorPane anchorPane = new AnchorPane();
     private final TableView<TelefonEntry> tableView;
-
 
     public EntryArea(ObservableList<TelefonEntry> telefonEntries) {
         tableView = new TableView<>();
@@ -46,7 +47,6 @@ public class EntryArea {
         tableView.getColumns().add(emailCol);
         tableView.setItems(telefonEntries);
         tableView.setEditable(true);
-
     }
 
     public TableView<TelefonEntry> getTableView() {
@@ -69,11 +69,11 @@ public class EntryArea {
         return tableView.getSelectionModel().getSelectedItems();
     }
 
-    private static class EditingCell extends TableCell<TelefonEntry, String> {
+    public static class EditingCell extends TableCell<TelefonEntry, String> {
 
         private TextField textField;
 
-        private EditingCell() {
+        public EditingCell() {
         }
 
         @Override
@@ -134,5 +134,4 @@ public class EntryArea {
     private static TelefonEntry getCurrentRow(TableColumn.CellEditEvent<TelefonEntry, String> t) {
         return t.getTableView().getItems().get(t.getTablePosition().getRow());
     }
-
 }
