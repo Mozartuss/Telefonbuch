@@ -33,17 +33,17 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         BorderPane root = new BorderPane();
         SearchArea searchArea = new SearchArea();
+        AddRow addRow = new AddRow();
+        PassingData passingData = new PassingData();
         ObservableList<TelefonEntry> list = FXCollections.observableArrayList();
         ObservableList<TelefonEntry> list2 = FXCollections.observableArrayList();
-
-
         ui.EntryArea entryArea = new ui.EntryArea(list);
         ui.EntryAreaProfBook entryAreaProfBook = new ui.EntryAreaProfBook(list2);
 
-        AddRow addRow = new AddRow();
+        passingData.getGuestToMainButton().setOnMouseClicked(event -> list.add(new TelefonEntry()));  //TODO move between the GUEST table to my MAIN table
+
         addRow.getAddButton().setOnMouseClicked(event -> list.add(new TelefonEntry(addRow.getFirstnameInput(), addRow.getLastnameInput(), addRow.getNumberInput())));
         addRow.getDeleteButton().setOnMouseClicked(event -> list.removeAll(entryArea.getSelectedEntries()));
-
         addRow.getSaveButton().setOnMouseClicked(event -> FileSystem.writeFile(list));
 
         FilteredList<TelefonEntry> filteredData = new FilteredList<>(list, event -> true);
@@ -67,8 +67,7 @@ public class Main extends Application {
         });
         searchArea.getImportButton().setOnMouseClicked(event -> {
             final FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Telefonbuch", "*.json"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Telefonbuch", "*.json"));
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             Path path = Paths.get(selectedFile.toString());
             List<TelefonEntry> entries = new ArrayList<>();
@@ -91,13 +90,14 @@ public class Main extends Application {
 
         root.setTop(searchArea.getPane());
         root.setLeft(entryArea.getAnchorPane());
+        root.setCenter(passingData.getPane());
         root.setRight(entryAreaProfBook.getAnchorPane());
 
         root.setBottom(addRow.getPane());
 
 
         primaryStage.setTitle("Telefonbuch");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setScene(new Scene(root, 700, 600));
         primaryStage.show();
 
 

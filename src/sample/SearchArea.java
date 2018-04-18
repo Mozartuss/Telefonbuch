@@ -13,9 +13,6 @@ public class SearchArea {
     private final Button loadButton = new Button("Laden");
     private final Button importButton = new Button("Import");
 
-    public TextField getSearchField(){
-        return searchField;
-    }
     public SearchArea() {
 
         AnchorPane.setLeftAnchor(searchField, 90.0);
@@ -35,13 +32,16 @@ public class SearchArea {
 
         pane.getChildren().addAll(searchField, loadButton, importButton);
     }
-
     public Button getLoadButton() {
         return loadButton;
     }
 
     public Button getImportButton() {
         return importButton;
+    }
+
+    public TextField getSearchField() {
+        return searchField;
     }
 
     public Node getPane() {

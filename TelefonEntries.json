@@ -1,37 +1,32 @@
 [
   {
     "lastName": "Vorname ",
-    "firstName": "Nachname ",
+    "firstName": "a",
     "number": "Telefonnummer "
   },
   {
     "lastName": "Vorname ",
-    "firstName": "Nachname ",
+    "firstName": "b",
     "number": "Telefonnummer "
   },
   {
     "lastName": "Vorname ",
-    "firstName": "Nachname ",
+    "firstName": "c",
     "number": "Telefonnummer "
   },
   {
     "lastName": "Vorname ",
-    "firstName": "Nachname ",
+    "firstName": "d",
     "number": "Telefonnummer "
   },
   {
     "lastName": "Vorname ",
-    "firstName": "Nachname ",
+    "firstName": "e",
     "number": "Telefonnummer "
   },
   {
-    "lastName": "Vorname ",
-    "firstName": "Nachname ",
-    "number": "Telefonnummer "
-  },
-  {
-    "lastName": "Vorname ",
-    "firstName": "Nachname ",
+    "lastName": "j",
+    "firstName": "f",
     "number": "Telefonnummer "
   }
 ]
