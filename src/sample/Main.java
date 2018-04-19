@@ -78,6 +78,7 @@ public class Main extends Application {
             Path path = Paths.get(selectedFile.toString());
             List<TelefonEntry> entries = new ArrayList<>();
             try (InputStream is = (Files.newInputStream(path))) {
+                System.out.println("Data Import ✔");
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode rootArray = mapper.readTree(is);
                 FileSystem.rootArray(entries, rootArray);
@@ -89,7 +90,7 @@ public class Main extends Application {
         searchArea.getLoadButton().setOnMouseClicked(event -> {
             List<TelefonEntry> fromFile = FileSystem.readEntriesFromFile();
             if (fromFile != null) {
-                System.out.println("Data Load");
+                System.out.println("Data Load ✔");
                 list.addAll(fromFile);
             }
         });
