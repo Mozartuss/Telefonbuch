@@ -1,5 +1,6 @@
 package sample;
 
+import data.TelefonEntry;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -9,16 +10,22 @@ import javafx.scene.layout.AnchorPane;
 public class SearchArea {
 
     private final AnchorPane pane = new AnchorPane();
-    private final TextField searchField = new TextField();
+    private final TextField searchFieldMain = new TextField();
+    private final TextField searchFieldImport = new TextField();
     private final Button loadButton = new Button("Laden");
     private final Button importButton = new Button("Import");
 
     public SearchArea() {
 
-        AnchorPane.setLeftAnchor(searchField, 90.0);
-        AnchorPane.setTopAnchor(searchField, 10.0);
-        AnchorPane.setBottomAnchor(searchField, 10.0);
-        AnchorPane.setRightAnchor(searchField, 90.0);
+        AnchorPane.setLeftAnchor(searchFieldMain, 90.0);
+        AnchorPane.setTopAnchor(searchFieldMain, 10.0);
+        AnchorPane.setBottomAnchor(searchFieldMain, 10.0);
+        searchFieldMain.setPrefWidth(167.0);
+
+        AnchorPane.setTopAnchor(searchFieldImport, 10.0);
+        AnchorPane.setBottomAnchor(searchFieldImport, 10.0);
+        AnchorPane.setRightAnchor(searchFieldImport, 90.0);
+        searchFieldImport.setPrefWidth(167.0);
 
         AnchorPane.setLeftAnchor(loadButton, 10.0);
         AnchorPane.setTopAnchor(loadButton, 10.0);
@@ -30,7 +37,7 @@ public class SearchArea {
         AnchorPane.setBottomAnchor(importButton, 10.0);
         importButton.setPrefWidth(70.0);
 
-        pane.getChildren().addAll(searchField, loadButton, importButton);
+        pane.getChildren().addAll(searchFieldMain, loadButton, importButton, searchFieldImport);
     }
     public Button getLoadButton() {
         return loadButton;
@@ -40,12 +47,24 @@ public class SearchArea {
         return importButton;
     }
 
-    public TextField getSearchField() {
-        return searchField;
+    public TextField getSearchFieldMain() {
+        return searchFieldMain;
+    }
+
+    public TextField getSearchFieldImport() {
+        return searchFieldImport;
     }
 
     public Node getPane() {
         return pane;
+    }
+
+    public boolean Filter(String newValue, TelefonEntry TelefonEntry, String lowerCaseFilter) {
+        if (TelefonEntry.getFirstName().contains(newValue)) {
+            return true;
+        } else if ((TelefonEntry.getLastName().toLowerCase().contains(lowerCaseFilter))) {
+            return true;
+        } else return (TelefonEntry.getNumber().toLowerCase().contains(lowerCaseFilter));
     }
 
 

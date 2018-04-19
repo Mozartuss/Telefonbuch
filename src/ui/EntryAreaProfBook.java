@@ -15,6 +15,7 @@ import java.util.List;
 public class EntryAreaProfBook {
     private final AnchorPane anchorPane = new AnchorPane();
     private final TableView<TelefonEntry> tableView2;
+    Object item;
 
     public EntryAreaProfBook(ObservableList<TelefonEntry> telefonEntries) {
         tableView2 = new TableView<>();
@@ -46,14 +47,35 @@ public class EntryAreaProfBook {
         tableView2.getColumns().add(emailCol);
         tableView2.setItems(telefonEntries);
         tableView2.setEditable(true);
+
+
     }
 
     private static TelefonEntry getCurrentRow(TableColumn.CellEditEvent<TelefonEntry, String> t) {
         return t.getTableView().getItems().get(t.getTablePosition().getRow());
     }
 
+
     public TableView<TelefonEntry> getTableView2() {
         return tableView2;
+    }
+
+    public EntryAreaProfBook getInstance() {
+        item = tableView2.getSelectionModel().selectedItemProperty().get();
+        return getInstance();
+    }
+
+
+    public List<TelefonEntry> getItems(List<TelefonEntry> items) {
+        if (items instanceof ObservableList) {
+            tableView2.setItems((ObservableList<TelefonEntry>) items);
+        }
+        return items;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public void setItems(List<TelefonEntry> items) {

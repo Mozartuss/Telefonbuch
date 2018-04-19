@@ -23,10 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-// was ist das boot sdk
-// und was ist der unterschied zum platform setting sdk
-
-
 public class Main extends Application {
 
     @Override
@@ -34,40 +30,50 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
         SearchArea searchArea = new SearchArea();
         AddRow addRow = new AddRow();
-        PassingData passingData = new PassingData();
+        MoveData moveData = new MoveData();
         ObservableList<TelefonEntry> list = FXCollections.observableArrayList();
         ObservableList<TelefonEntry> list2 = FXCollections.observableArrayList();
         ui.EntryArea entryArea = new ui.EntryArea(list);
         ui.EntryAreaProfBook entryAreaProfBook = new ui.EntryAreaProfBook(list2);
 
-        passingData.getGuestToMainButton().setOnMouseClicked(event -> list.add(new TelefonEntry()));  //TODO move between the GUEST table to my MAIN table
+        moveData.getGuestToMainButton().setOnMouseClicked(event -> list.add(new TelefonEntry(entryAreaProfBook.getSelectedEntries())));  //TODO move between the GUEST table to my MAIN table
 
         addRow.getAddButton().setOnMouseClicked(event -> list.add(new TelefonEntry(addRow.getFirstnameInput(), addRow.getLastnameInput(), addRow.getNumberInput())));
         addRow.getDeleteButton().setOnMouseClicked(event -> list.removeAll(entryArea.getSelectedEntries()));
         addRow.getSaveButton().setOnMouseClicked(event -> FileSystem.writeFile(list));
 
         FilteredList<TelefonEntry> filteredData = new FilteredList<>(list, event -> true);
-        searchArea.getSearchField().setOnKeyReleased(event -> {
-            searchArea.getSearchField().textProperty().addListener(((observable, oldValue, newValue) -> {
-                filteredData.setPredicate((Predicate<? super TelefonEntry>) TelefonEntry -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    if (TelefonEntry.getFirstName().contains(newValue)) {
-                        return true;
-                    } else if ((TelefonEntry.getLastName().toLowerCase().contains(lowerCaseFilter))) {
-                        return true;
-                    } else return (TelefonEntry.getNumber().toLowerCase().contains(lowerCaseFilter));
-                });
-            }));
+        FilteredList<TelefonEntry> filteredData2 = new FilteredList<>(list2, event -> true);
+
+        searchArea.getSearchFieldMain().setOnKeyReleased(event -> {
+            searchArea.getSearchFieldMain().textProperty().addListener(((observable, oldValue, newValue) -> filteredData.setPredicate((Predicate<? super TelefonEntry>) TelefonEntry -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return searchArea.Filter(newValue, TelefonEntry, lowerCaseFilter);
+            })));
             SortedList<TelefonEntry> sortedData = new SortedList<>(filteredData);
             sortedData.comparatorProperty().bind(entryArea.getTableView().comparatorProperty());
             entryArea.setItems(sortedData);
         });
+        searchArea.getSearchFieldImport().setOnKeyReleased(event -> {
+            searchArea.getSearchFieldImport().textProperty().addListener(((observable, oldValue, newValue) -> filteredData2.setPredicate((Predicate<? super TelefonEntry>) TelefonEntry -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return searchArea.Filter(newValue, TelefonEntry, lowerCaseFilter);
+            })));
+            SortedList<TelefonEntry> sortedData2 = new SortedList<>(filteredData2);
+            sortedData2.comparatorProperty().bind(entryAreaProfBook.getTableView2().comparatorProperty());
+            entryAreaProfBook.setItems(sortedData2);
+        });
         searchArea.getImportButton().setOnMouseClicked(event -> {
             final FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Telefonbuch", "*.json"));
+            File userDirectory = new File("C:/Users/LENOVO/Desktop/UNI/SE SS18/Praktikum/Projekte/Telefonbuch");
+            fileChooser.setInitialDirectory(userDirectory);
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
             Path path = Paths.get(selectedFile.toString());
             List<TelefonEntry> entries = new ArrayList<>();
@@ -90,16 +96,14 @@ public class Main extends Application {
 
         root.setTop(searchArea.getPane());
         root.setLeft(entryArea.getAnchorPane());
-        root.setCenter(passingData.getPane());
+        root.setCenter(moveData.getPane());
         root.setRight(entryAreaProfBook.getAnchorPane());
 
         root.setBottom(addRow.getPane());
 
-
         primaryStage.setTitle("Telefonbuch");
         primaryStage.setScene(new Scene(root, 700, 600));
         primaryStage.show();
-
 
     }
 

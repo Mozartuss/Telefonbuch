@@ -2,6 +2,8 @@ package data;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.List;
+
 public class TelefonEntry {
 
     private final SimpleStringProperty lastName = new SimpleStringProperty();
@@ -9,7 +11,7 @@ public class TelefonEntry {
     private final SimpleStringProperty number = new SimpleStringProperty();
     private boolean isNew = true;
 
-    public TelefonEntry() {
+    public TelefonEntry(List<TelefonEntry> items) {
         this.lastName.set("...");
         this.firstName.set("...");
         this.number.set("...");
@@ -22,6 +24,7 @@ public class TelefonEntry {
         this.number.set(number);
         isNew = false;
     }
+
 
     public String getLastName() {
         return lastName.get();
