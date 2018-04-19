@@ -73,7 +73,7 @@ public class EntryArea {
 
         private TextField textField;
 
-        public EditingCell() {
+        EditingCell() {
         }
 
         @Override

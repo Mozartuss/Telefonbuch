@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 
-public class SearchArea {
+class SearchArea {
 
     private final AnchorPane pane = new AnchorPane();
     private final TextField searchFieldMain = new TextField();
@@ -15,7 +15,7 @@ public class SearchArea {
     private final Button loadButton = new Button("Laden");
     private final Button importButton = new Button("Import");
 
-    public SearchArea() {
+    SearchArea() {
 
         AnchorPane.setLeftAnchor(searchFieldMain, 90.0);
         AnchorPane.setTopAnchor(searchFieldMain, 10.0);
@@ -39,27 +39,28 @@ public class SearchArea {
 
         pane.getChildren().addAll(searchFieldMain, loadButton, importButton, searchFieldImport);
     }
-    public Button getLoadButton() {
+
+    Button getLoadButton() {
         return loadButton;
     }
 
-    public Button getImportButton() {
+    Button getImportButton() {
         return importButton;
     }
 
-    public TextField getSearchFieldMain() {
+    TextField getSearchFieldMain() {
         return searchFieldMain;
     }
 
-    public TextField getSearchFieldImport() {
+    TextField getSearchFieldImport() {
         return searchFieldImport;
     }
 
-    public Node getPane() {
+    Node getPane() {
         return pane;
     }
 
-    public boolean Filter(String newValue, TelefonEntry TelefonEntry, String lowerCaseFilter) {
+    boolean Filter(String newValue, TelefonEntry TelefonEntry, String lowerCaseFilter) {
         if (TelefonEntry.getFirstName().contains(newValue)) {
             return true;
         } else if ((TelefonEntry.getLastName().toLowerCase().contains(lowerCaseFilter))) {

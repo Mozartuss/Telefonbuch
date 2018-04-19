@@ -15,12 +15,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileSystem {
+class FileSystem {
 
     private static Path path = Paths.get("TelefonEntries.json");
 
 
-    public static List<TelefonEntry> readEntriesFromFile() {
+    static List<TelefonEntry> readEntriesFromFile() {
         List<TelefonEntry> entries = new ArrayList<>();
         try (InputStream is = Files.newInputStream(path)) {
             ObjectMapper mapper = new ObjectMapper();
@@ -42,7 +42,7 @@ public class FileSystem {
     }
 
 
-    public static void writeFile(List<TelefonEntry> entries) {
+    static void writeFile(List<TelefonEntry> entries) {
         JsonFactory factory = new JsonFactory();
         try (OutputStream outputStream = Files.newOutputStream(path);
              JsonGenerator jsonGenerator = factory.createGenerator(outputStream)) {
@@ -55,7 +55,6 @@ public class FileSystem {
                 jsonGenerator.writeEndObject();
             }
             jsonGenerator.writeEndArray();
-            jsonGenerator.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,12 +4,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class MoveData {
+class MoveData {
     private final AnchorPane pane = new AnchorPane();
     private final Button mainToGuestButton = new Button("-->");
     private final Button guestToMainButton = new Button("<--");
 
-    public MoveData() {
+    MoveData() {
 
         AnchorPane.setLeftAnchor(mainToGuestButton, 45.0);
         AnchorPane.setRightAnchor(mainToGuestButton, 45.0);
@@ -27,15 +27,15 @@ public class MoveData {
         pane.getChildren().addAll(guestToMainButton, mainToGuestButton);
     }
 
-    public Button getMainToGuestButton() {
+    Button getMainToGuestButton() {
         return mainToGuestButton;
     }
 
-    public Button getGuestToMainButton() {
+    Button getGuestToMainButton() {
         return guestToMainButton;
     }
 
-    public Node getPane() {
+    Node getPane() {
         return pane;
     }
 }

@@ -14,31 +14,7 @@ public class AddRow {
     private final Button deleteButton = new Button("Entfernen");
     private final Button saveButton = new Button("Speichern");
 
-    public Button getSaveButton() {
-        return saveButton;
-    }
-
-    public Button getDeleteButton() {
-        return deleteButton;
-    }
-
-    public Button getAddButton() {
-        return addButton;
-    }
-
-    public String getFirstnameInput() {
-        return firstnameInput.getText();
-    }
-
-    public String getLastnameInput() {
-        return lastnameInput.getText();
-    }
-
-    public String getNumberInput() {
-        return numberInput.getText();
-    }
-
-    public AddRow() {
+    AddRow() {
 
         AnchorPane.setLeftAnchor(firstnameInput, 10.0);
         AnchorPane.setTopAnchor(firstnameInput, 10.0);
@@ -74,7 +50,31 @@ public class AddRow {
 
     }
 
-    public Node getPane() {
+    Button getSaveButton() {
+        return saveButton;
+    }
+
+    Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    Button getAddButton() {
+        return addButton;
+    }
+
+    String getFirstnameInput() {
+        return firstnameInput.getText();
+    }
+
+    String getLastnameInput() {
+        return lastnameInput.getText();
+    }
+
+    String getNumberInput() {
+        return numberInput.getText();
+    }
+
+    Node getPane() {
         return pane;
     }
 }

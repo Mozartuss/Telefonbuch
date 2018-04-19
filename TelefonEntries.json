@@ -33,5 +33,10 @@
     "lastName": "Vorname ",
     "firstName": "Nachname ",
     "number": "Telefonnummer "
+  },
+  {
+    "lastName": "Vorname ",
+    "firstName": "Nachname ",
+    "number": "Telefonnummer "
   }
 ]

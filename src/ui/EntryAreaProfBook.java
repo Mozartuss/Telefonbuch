@@ -15,7 +15,6 @@ import java.util.List;
 public class EntryAreaProfBook {
     private final AnchorPane anchorPane = new AnchorPane();
     private final TableView<TelefonEntry> tableView2;
-    Object item;
 
     public EntryAreaProfBook(ObservableList<TelefonEntry> telefonEntries) {
         tableView2 = new TableView<>();
@@ -60,8 +59,8 @@ public class EntryAreaProfBook {
         return tableView2;
     }
 
-    public EntryAreaProfBook getInstance() {
-        item = tableView2.getSelectionModel().selectedItemProperty().get();
+    private EntryAreaProfBook getInstance() {
+        Object item = tableView2.getSelectionModel().selectedItemProperty().get();
         return getInstance();
     }
 
