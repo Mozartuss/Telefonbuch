@@ -2,27 +2,17 @@ package data;
 
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.List;
-
 public class TelefonEntry {
 
     private final SimpleStringProperty lastName = new SimpleStringProperty();
     private final SimpleStringProperty firstName = new SimpleStringProperty();
     private final SimpleStringProperty number = new SimpleStringProperty();
-    private boolean isNew = true;
 
-    public TelefonEntry(List<TelefonEntry> items) {
-        this.lastName.set("...");
-        this.firstName.set("...");
-        this.number.set("...");
-        isNew = true;
-    }
 
     public TelefonEntry(String lastName, String firstName, String number) {
         this.lastName.set(lastName);
         this.firstName.set(firstName);
         this.number.set(number);
-        isNew = false;
     }
 
 
@@ -32,7 +22,6 @@ public class TelefonEntry {
 
     public void setLastName(String value) {
         lastName.set(value);
-        isNew = false;
     }
 
     public String getFirstName() {
@@ -41,7 +30,6 @@ public class TelefonEntry {
 
     public void setFirstName(String value) {
         firstName.set(value);
-        isNew = false;
     }
 
     public String getNumber() {
@@ -50,10 +38,10 @@ public class TelefonEntry {
 
     public void setNumber(String value) {
         number.set(value);
-        isNew = false;
     }
 
-    public boolean isNew() {
-        return isNew;
+    public String toString() {
+        return getFirstName() + getLastName() + getNumber();
     }
+
 }

@@ -1,10 +1,17 @@
 package sample;
 
 import data.TelefonEntry;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import ui.EntryArea;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 
 class SearchArea {
@@ -40,7 +47,7 @@ class SearchArea {
         pane.getChildren().addAll(searchFieldMain, loadButton, importButton, searchFieldImport);
     }
 
-    Button getLoadButton() {
+    private Button getLoadButton() {
         return loadButton;
     }
 
@@ -48,7 +55,7 @@ class SearchArea {
         return importButton;
     }
 
-    TextField getSearchFieldMain() {
+    private TextField getSearchFieldMain() {
         return searchFieldMain;
     }
 
@@ -60,12 +67,37 @@ class SearchArea {
         return pane;
     }
 
-    boolean Filter(String newValue, TelefonEntry TelefonEntry, String lowerCaseFilter) {
+    boolean filter(String newValue, TelefonEntry TelefonEntry, String lowerCaseFilter) {
         if (TelefonEntry.getFirstName().contains(newValue)) {
             return true;
         } else if ((TelefonEntry.getLastName().toLowerCase().contains(lowerCaseFilter))) {
             return true;
         } else return (TelefonEntry.getNumber().toLowerCase().contains(lowerCaseFilter));
+    }
+
+    void searchField(SearchArea searchArea, EntryArea entryArea, FilteredList<TelefonEntry> filteredData) {
+        searchArea.getSearchFieldMain().setOnKeyReleased(event -> {
+            searchArea.getSearchFieldMain().textProperty().addListener(((observable, oldValue, newValue) -> filteredData.setPredicate((Predicate<? super TelefonEntry>) TelefonEntry -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return searchArea.filter(newValue, TelefonEntry, lowerCaseFilter);
+            })));
+            SortedList<TelefonEntry> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(entryArea.getTableView().comparatorProperty());
+            entryArea.setItems(sortedData);
+        });
+    }
+
+    void loadButton(SearchArea searchArea, ObservableList<TelefonEntry> list) {
+        searchArea.getLoadButton().setOnMouseClicked(event -> {
+            List<TelefonEntry> fromFile = FileSystem.readEntriesFromFile();
+            if (fromFile != null) {
+                System.out.println("Data Load ✔");
+                list.addAll(fromFile);
+            }
+        });
     }
 
 

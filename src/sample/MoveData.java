@@ -1,8 +1,14 @@
 package sample;
 
+import data.TelefonEntry;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import ui.EntryArea;
+import ui.EntryAreaProfBook;
+
+import java.util.stream.Collectors;
 
 class MoveData {
     private final AnchorPane pane = new AnchorPane();
@@ -27,15 +33,31 @@ class MoveData {
         pane.getChildren().addAll(guestToMainButton, mainToGuestButton);
     }
 
-    Button getMainToGuestButton() {
+    private Button getMainToGuestButton() {
         return mainToGuestButton;
     }
 
-    Button getGuestToMainButton() {
+    private Button getGuestToMainButton() {
         return guestToMainButton;
     }
 
     Node getPane() {
         return pane;
+    }
+
+    void moveToGuest(MoveData moveData, ObservableList<TelefonEntry> list2, EntryArea entryArea) {
+        moveData.getMainToGuestButton().setOnMouseClicked(event -> {
+            String listString = entryArea.getSelectedEntries().stream().map(Object::toString).collect(Collectors.joining(", "));
+            list2.addAll(entryArea.getSelectedEntries());
+            System.out.println("Selected: " + listString);
+        });
+    }
+
+    void moveToMain(MoveData moveData, ObservableList<TelefonEntry> list, EntryAreaProfBook entryAreaProfBook) {
+        moveData.getGuestToMainButton().setOnMouseClicked(event -> {
+            String listString = entryAreaProfBook.getSelectedEntries().stream().map(Object::toString).collect(Collectors.joining(", "));
+            list.addAll(entryAreaProfBook.getSelectedEntries());
+            System.out.println("Selected: " + listString);
+        });
     }
 }

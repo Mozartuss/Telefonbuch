@@ -1,11 +1,14 @@
 package sample;
 
+import data.TelefonEntry;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import ui.EntryArea;
 
-public class AddRow {
+class AddRow {
     private final AnchorPane pane = new AnchorPane();
     private final TextField firstnameInput = new TextField("Vorname ");
     private final TextField lastnameInput = new TextField("Nachname ");
@@ -50,31 +53,43 @@ public class AddRow {
 
     }
 
-    Button getSaveButton() {
+    private Button getSaveButton() {
         return saveButton;
     }
 
-    Button getDeleteButton() {
+    private Button getDeleteButton() {
         return deleteButton;
     }
 
-    Button getAddButton() {
+    private Button getAddButton() {
         return addButton;
     }
 
-    String getFirstnameInput() {
+    private String getFirstnameInput() {
         return firstnameInput.getText();
     }
 
-    String getLastnameInput() {
+    private String getLastnameInput() {
         return lastnameInput.getText();
     }
 
-    String getNumberInput() {
+    private String getNumberInput() {
         return numberInput.getText();
     }
 
     Node getPane() {
         return pane;
+    }
+
+    void addButton(AddRow addRow, ObservableList<TelefonEntry> list) {
+        addRow.getAddButton().setOnMouseClicked(event -> list.add(new TelefonEntry(addRow.getLastnameInput(), addRow.getFirstnameInput(), addRow.getNumberInput())));
+    }
+
+    void deleteButton(AddRow addRow, ObservableList<TelefonEntry> list, EntryArea entryArea) {
+        addRow.getDeleteButton().setOnMouseClicked(event -> list.removeAll(entryArea.getSelectedEntries()));
+    }
+
+    void saveButton(AddRow addRow, ObservableList<TelefonEntry> list) {
+        addRow.getSaveButton().setOnMouseClicked(event -> FileSystem.writeFile(list));
     }
 }

@@ -59,17 +59,16 @@ public class EntryAreaProfBook {
         return tableView2;
     }
 
-    private EntryAreaProfBook getInstance() {
-        Object item = tableView2.getSelectionModel().selectedItemProperty().get();
-        return getInstance();
-    }
-
 
     public List<TelefonEntry> getItems(List<TelefonEntry> items) {
         if (items instanceof ObservableList) {
             tableView2.setItems((ObservableList<TelefonEntry>) items);
         }
         return items;
+    }
+
+    public ObservableList<TelefonEntry> getSelectedEntries() {
+        return tableView2.getSelectionModel().getSelectedItems();
     }
 
     @Override
@@ -89,7 +88,4 @@ public class EntryAreaProfBook {
         return anchorPane;
     }
 
-    public ObservableList<TelefonEntry> getSelectedEntries() {
-        return tableView2.getSelectionModel().getSelectedItems();
-    }
 }
