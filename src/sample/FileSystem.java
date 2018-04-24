@@ -1,14 +1,12 @@
 package sample;
 
 import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import data.TelefonEntry;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,12 +15,11 @@ import java.util.List;
 
 class FileSystem {
 
-    private static Path path = Paths.get("TelefonEntries.json");
-
+    private static Path path1 = Paths.get("C:/Users/LENOVO/Desktop/UNI/SE SS18/Praktikum/Projekte/Telefonbuch/TelefonEntries.json");
 
     static List<TelefonEntry> readEntriesFromFile() {
         List<TelefonEntry> entries = new ArrayList<>();
-        try (InputStream is = Files.newInputStream(path)) {
+        try (InputStream is = Files.newInputStream(path1)) {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootArray = mapper.readTree(is);
             rootArray(entries, rootArray);
@@ -41,24 +38,12 @@ class FileSystem {
         }
     }
 
-
     static void writeFile(List<TelefonEntry> entries) {
         JsonFactory factory = new JsonFactory();
-        try (OutputStream outputStream = Files.newOutputStream(path);
-             JsonGenerator jsonGenerator = factory.createGenerator(outputStream)) {
-            jsonGenerator.writeStartArray();
-            for (TelefonEntry entry : entries) {
-                jsonGenerator.writeStartObject();
-                jsonGenerator.writeStringField("lastName", entry.getLastName());
-                jsonGenerator.writeStringField("firstName", entry.getFirstName());
-                jsonGenerator.writeStringField("number", entry.getNumber());
-                jsonGenerator.writeEndObject();
-            }
-            jsonGenerator.writeEndArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImportList.writeData(entries, path1, factory);
+
     }
+
 }
 
 

@@ -100,6 +100,9 @@ class SearchArea {
         });
     }
 
+    FilteredList<TelefonEntry> filteredData(ObservableList<TelefonEntry> list) {
+        return new FilteredList<>(list, event -> true);
+    }
 
 }
 

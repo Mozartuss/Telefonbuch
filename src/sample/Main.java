@@ -21,8 +21,8 @@ public class Main extends Application {
         ImportList importList = new ImportList();
         ObservableList<TelefonEntry> list = FXCollections.observableArrayList();
         ObservableList<TelefonEntry> list2 = FXCollections.observableArrayList();
-        FilteredList<TelefonEntry> filteredData = new FilteredList<>(list, event -> true);
-        FilteredList<TelefonEntry> filteredData2 = new FilteredList<>(list2, event -> true);
+        FilteredList<TelefonEntry> filteredData = searchArea.filteredData(list);
+        FilteredList<TelefonEntry> filteredData2 = searchArea.filteredData(list2);
         ui.EntryArea entryArea = new ui.EntryArea(list);
         ui.EntryAreaProfBook entryAreaProfBook = new ui.EntryAreaProfBook(list2);
 
@@ -33,6 +33,7 @@ public class Main extends Application {
         addRow.addButton(addRow, list);
         addRow.deleteButton(addRow, list, entryArea);
         addRow.saveButton(addRow, list);
+        importList.saveImportList(primaryStage, addRow, list2);
         searchArea.searchField(searchArea, entryArea, filteredData);
         importList.searchAreaImportList(searchArea, entryAreaProfBook, filteredData2);
         importList.importButton(primaryStage, searchArea, list2);

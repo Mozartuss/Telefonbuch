@@ -23,7 +23,6 @@ class MoveData {
         mainToGuestButton.setPrefWidth(70.0);
         mainToGuestButton.setPrefHeight(10.0);
 
-
         AnchorPane.setRightAnchor(guestToMainButton, 45.0);
         AnchorPane.setLeftAnchor(guestToMainButton, 45.0);
         AnchorPane.setBottomAnchor(guestToMainButton, 300.0);

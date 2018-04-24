@@ -9,9 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import ui.EntryArea;
 
 class AddRow {
+    private final TextField firstNameInput = new TextField("Vorname ");
     private final AnchorPane pane = new AnchorPane();
-    private final TextField firstnameInput = new TextField("Vorname ");
-    private final TextField lastnameInput = new TextField("Nachname ");
+    private final TextField lastNameInput = new TextField("Nachname ");
+    ImportList importList = new ImportList();
     private final TextField numberInput = new TextField("Telefonnummer ");
     private final Button addButton = new Button("Einfügen");
     private final Button deleteButton = new Button("Entfernen");
@@ -19,15 +20,15 @@ class AddRow {
 
     AddRow() {
 
-        AnchorPane.setLeftAnchor(firstnameInput, 10.0);
-        AnchorPane.setTopAnchor(firstnameInput, 10.0);
-        AnchorPane.setBottomAnchor(firstnameInput, 10.0);
-        firstnameInput.setPrefWidth(75.5);
+        AnchorPane.setLeftAnchor(firstNameInput, 10.0);
+        AnchorPane.setTopAnchor(firstNameInput, 10.0);
+        AnchorPane.setBottomAnchor(firstNameInput, 10.0);
+        firstNameInput.setPrefWidth(75.5);
 
-        AnchorPane.setLeftAnchor(lastnameInput, 95.5);
-        AnchorPane.setTopAnchor(lastnameInput, 10.0);
-        AnchorPane.setBottomAnchor(lastnameInput, 10.0);
-        lastnameInput.setPrefWidth(75.5);
+        AnchorPane.setLeftAnchor(lastNameInput, 95.5);
+        AnchorPane.setTopAnchor(lastNameInput, 10.0);
+        AnchorPane.setBottomAnchor(lastNameInput, 10.0);
+        lastNameInput.setPrefWidth(75.5);
 
         AnchorPane.setLeftAnchor(numberInput, 181.0);
         AnchorPane.setTopAnchor(numberInput, 10.0);
@@ -49,11 +50,11 @@ class AddRow {
         AnchorPane.setBottomAnchor(addButton, 10.0);
         addButton.setPrefWidth(70.0);
 
-        pane.getChildren().addAll(firstnameInput, lastnameInput, numberInput, addButton, deleteButton, saveButton);
+        pane.getChildren().addAll(firstNameInput, lastNameInput, numberInput, addButton, deleteButton, saveButton);
 
     }
 
-    private Button getSaveButton() {
+    Button getSaveButton() {
         return saveButton;
     }
 
@@ -65,12 +66,12 @@ class AddRow {
         return addButton;
     }
 
-    private String getFirstnameInput() {
-        return firstnameInput.getText();
+    private String getFirstNameInput() {
+        return firstNameInput.getText();
     }
 
-    private String getLastnameInput() {
-        return lastnameInput.getText();
+    private String getLastNameInput() {
+        return lastNameInput.getText();
     }
 
     private String getNumberInput() {
@@ -82,7 +83,7 @@ class AddRow {
     }
 
     void addButton(AddRow addRow, ObservableList<TelefonEntry> list) {
-        addRow.getAddButton().setOnMouseClicked(event -> list.add(new TelefonEntry(addRow.getLastnameInput(), addRow.getFirstnameInput(), addRow.getNumberInput())));
+        addRow.getAddButton().setOnMouseClicked(event -> list.add(new TelefonEntry(addRow.getLastNameInput(), addRow.getFirstNameInput(), addRow.getNumberInput())));
     }
 
     void deleteButton(AddRow addRow, ObservableList<TelefonEntry> list, EntryArea entryArea) {
