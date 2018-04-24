@@ -27,7 +27,7 @@ class ImportList {
     private static void writeImportFile(Stage primaryStage, List<TelefonEntry> entries) {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JSON-Datei", "*.json"));
-        File userDirectory = new File("C:/Users/LENOVO/Desktop/UNI/SE SS18/Praktikum/Projekte/Telefonbuch");
+        File userDirectory = new File("C:/Users/LENOVO/Desktop");
         fileChooser.setInitialDirectory(userDirectory);
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
         Path path2 = Paths.get(selectedFile.toString());

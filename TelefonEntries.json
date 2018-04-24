@@ -58,5 +58,15 @@
     "lastName": "b",
     "firstName": "d",
     "number": "c"
+  },
+  {
+    "lastName": "Nachname ",
+    "firstName": "Vorname ",
+    "number": "Telefonnummer "
+  },
+  {
+    "lastName": "Nachname ",
+    "firstName": "Vorname ",
+    "number": "Telefonnummer "
   }
 ]
