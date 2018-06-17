@@ -15,7 +15,7 @@ import java.util.List;
 
 class FileSystem {
 
-  private static Path path1 = Paths.get("C:/Users/LENOVO/Desktop/UNI/SE SS18/Praktikum/Projekte/Telefonbuch/TelefonEntries.json");
+  private static Path path1 = Paths.get("C:\\Users\\LENOVO\\OneDrive\\UNI\\Software-Engineering 2 X\\Praktikum\\Telefonbuch\\TelefonbuchCode\\src\\main\\resources\\TelefonEntries.json");
 
   static List<TelefonEntry> readEntriesFromFile() {
     List<TelefonEntry> entries = new ArrayList<>();
