@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Telefonbuch" />
+        <module name="TelefonbuchCode" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Telefonbuch" target="10" />
+      <module name="TelefonbuchCode" target="10" />
     </bytecodeTargetLevel>
   </component>
 </project>
